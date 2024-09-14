@@ -4,6 +4,25 @@ import io
 from audio_recorder_streamlit import audio_recorder
 from streamlit_webrtc import webrtc_streamer, WebRtcMode, VideoProcessorBase
 
+import streamlit_authenticator as stauth
+import yaml
+from yaml.loader import SafeLoader
+with open('./config.yaml') as file:
+    config = yaml.load(file, Loader=SafeLoader)
+
+
+
+hashed_passwords = stauth.Hasher(['abc', 'def']).generate()
+
+authenticator = Authenticate(
+    config['credentials'],
+    config['cookie']['name'],
+    config['cookie']['key'],
+    config['cookie']['expiry_days'],
+    config['preauthorized']
+)
+
+name, authentication_status, username = authenticator.login('Login', 'main')
 
 
 
