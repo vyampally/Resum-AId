@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect } from "react";
 import { Form, Button, Card, Alert } from "react-bootstrap";
 import { useAuth } from "../contexts/AuthContext";
 import { Link, useHistory } from "react-router-dom";
-import '../App.css'; // Ensure this is the correct path
+import '../App.css';
 
 export default function Login() {
   const emailRef = useRef();
@@ -36,7 +36,7 @@ export default function Login() {
       setError("");
       setLoading(true);
       await login(emailRef.current.value, passwordRef.current.value);
-      history.push("/"); // Redirect to the home page after login
+      history.push("/");
     } catch {
       setError("Failed to log in to ResumAid");
     }
@@ -46,10 +46,10 @@ export default function Login() {
 
   return (
     <>
-      <Card>
+      <Card className="card">
         <Card.Body>
-          <h2 className="text-center mb-4">
-            Log In to <span className="resume-aid"><span className="chicago-maroon">Resum</span><strong className="burnt-orange">Ai</strong><span className="chicago-maroon">d</span></span>
+          <h2 className="login-title">
+            Log In to <span style={{ color: '#A72A29' }}>Resum</span><strong className="resume-aid-bold">Ai</strong><span style={{ color: '#A72A29' }}>d</span>
           </h2>
           {error && <Alert variant="danger">{error}</Alert>}
           <Form onSubmit={handleSubmit}>
@@ -68,7 +68,7 @@ export default function Login() {
         </Card.Body>
       </Card>
       <div className="w-100 text-center mt-2">
-        Need an account? <Link to="/signup">Sign Up</Link>
+        Need an account? <Link to="/signup" className="link-button">Sign Up</Link>
       </div>
     </>
   );
