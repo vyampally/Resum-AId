@@ -20,7 +20,7 @@ app = FastAPI()
 # Configure CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:8501"],
+    allow_origins=["http://localhost:3000"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -65,6 +65,17 @@ async def upload_job_description(job_description: UploadFile = File(...)):
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error processing job description: {e}")
 
+#choose either technical or behavioral
+@app.post("/choose_question_type")
+async def choose_question_type(question_type: str = Form(...)):
+    #check if valid
+    if question_type not in ["behavioral", "technical"]:
+        raise HTTPException(status_code=400, detail="Invalid question type")
+    
+    #generate questions based on type
+    interview_env["question_type"] = question_type
+    return {"message": f"{question_type.capitalize()} questions selected"}
+
 #user response
 @app.post("/submit_response")
 async def submit_response(audio: UploadFile = File(...)):
@@ -80,7 +91,7 @@ async def submit_response(audio: UploadFile = File(...)):
             response_text = next_question
         else:
             #once question array is over
-            response_text = "Thank you for completing the interview. We will get back to you soon."
+            response_text = "Great job completing the interview!"
             
             #reset interview context and array
             interview_env["questions"] = []
@@ -99,9 +110,10 @@ async def interview_response():
         #look at resume and description
         user_resume = interview_env["user_resume"]
         job_description_text = interview_env["job_description_text"]
+        question_type = interview_env.get("question_type", "behavioral")  # Default to behavioral if not set
 
-        #generate fitting questions
-        interview_env["questions"] = generate_interview_questions(user_resume, job_description_text)
+        #generate fitting questions based on the question type
+        interview_env["questions"] = generate_interview_questions(user_resume, job_description_text, question_type)
         interview_env["current_question_index"] = 0
 
         #set user response array
@@ -135,20 +147,19 @@ def extract_text_from_pdf(pdf_content):
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error reading PDF file: {e}")
 
+
 #generate questions with OpenAI
-def generate_interview_questions(user_resume, job_description_text):
+def generate_interview_questions(user_resume, job_description_text, question_type):
     messages = [
         #giving role to the AI
-        {"role": "system", "content": "You are an assistant for an interviewer that needs to generate questions based off of a given resume and job description."},
-        {"role": "user", "content": f"Generate three detailed interview questions based on the following resume and job description:\n\nResume:\n{user_resume}\n\nJob Description:\n{job_description_text}"}
+        {"role": "system", "content": "You are an assistant for an interviewer generating questions based on a resume and job description."},
+        {"role": "user", "content": f"Generate three {question_type} interview questions based on the following resume and job description:\n\nResume:\n{user_resume}\n\nJob Description:\n{job_description_text}"}
     ]
-    
     #generate response from gpt 3.5 turbo
     response = openai.chat.completions.create(
         model="gpt-3.5-turbo",
         messages=messages,
     )
-    
     #return questions from api response
     questions = response.choices[0].message.content
     return questions.split('\n\n')
