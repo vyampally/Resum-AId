@@ -11,25 +11,23 @@ export default function Login() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const history = useHistory();
-  const [theme, setTheme] = useState("light");
 
-  // Effect to set the theme based on system preference
   useEffect(() => {
-    const handleThemeChange = (e) => {
-      const newTheme = e.matches ? "dark" : "light";
-      setTheme(newTheme);
+    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+
+    const setTheme = (e) => {
+      if (e.matches) {
+        document.body.classList.add("dark-mode");
+      } else {
+        document.body.classList.remove("dark-mode");
+      }
     };
 
-    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
-    setTheme(mediaQuery.matches ? "dark" : "light");
-    mediaQuery.addEventListener("change", handleThemeChange);
+    setTheme(mediaQuery);
+    mediaQuery.addEventListener("change", setTheme);
 
-    return () => mediaQuery.removeEventListener("change", handleThemeChange);
+    return () => mediaQuery.removeEventListener("change", setTheme);
   }, []);
-
-  useEffect(() => {
-    document.body.className = theme; // Apply the theme class to the body
-  }, [theme]);
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -40,7 +38,7 @@ export default function Login() {
       await login(emailRef.current.value, passwordRef.current.value);
       history.push("/"); // Redirect to the home page after login
     } catch {
-      setError("Failed to log in to ResumeAI");
+      setError("Failed to log in to ResumAid");
     }
 
     setLoading(false);
@@ -48,10 +46,10 @@ export default function Login() {
 
   return (
     <>
-      <Card className={theme}>
-        <Card.Body className={theme}>
+      <Card>
+        <Card.Body>
           <h2 className="text-center mb-4">
-            Log In to <span className="resume-ai">Resum<strong>AI</strong>d</span>
+            Log In to <span className="resume-aid"><span className="chicago-maroon">Resum</span><strong className="burnt-orange">Ai</strong><span className="chicago-maroon">d</span></span>
           </h2>
           {error && <Alert variant="danger">{error}</Alert>}
           <Form onSubmit={handleSubmit}>

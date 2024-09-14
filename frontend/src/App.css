@@ -2,42 +2,65 @@
 
 /* General Styles */
 body {
-  font-family: 'Roboto', sans-serif; /* Default font for the application */
+  font-family: 'Roboto', sans-serif; /* Use Roboto font */
+  font-weight: 300; /* Thinner weight for body text */
   background-color: #f8f9fa; /* Light background color */
-  color: #333; /* Default text color */
+  color: #4a1c1c; /* Maroon text color */
   margin: 0;
   padding: 0;
+}
+
+body.dark-mode {
+  background-color: #000000; /* Dark background color */
+  color: #ffffff; /* White text color */
 }
 
 /* Card Styles */
 .card {
   margin: 20px;
   border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
 }
 
-/* ResumeAI Specific Styles */
-.resume-ai {
-  font-family: 'Roboto', sans-serif; /* Ensure it uses the same font */
-  font-weight: 700; /* Bold */
-  font-size: 2rem; /* Increased size for better visibility */
-  color: #007bff; /* Change color for better visibility (optional) */
+/* ResumeAid Specific Styles */
+.resume-aid {
+  font-weight: 400; /* Normal weight for the resume-aid text */
+  font-size: 2.5rem; /* Professional size for better visibility */
+}
+
+.chicago-maroon {
+  color: #A72A29; /* Chicago Maroon color */
+}
+
+.burnt-orange {
+  color: #CC6633; /* Burnt Orange color */
 }
 
 /* Button Styles */
 button {
-  background-color: #007bff; /* Primary button color */
+  background-color: #d45d00; /* Orange button color */
   border: none;
   color: white;
+  padding: 10px 20px; /* Padding for better touch targets */
+  border-radius: 5px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor on hover */
+}
+
+/* Button Hover Effect */
+button:hover {
+  background-color: #b34300; /* Darker shade on hover */
 }
 
 /* Alert Styles */
 .alert {
   margin: 20px 0; /* Add margin to alerts */
+  background-color: #f8d7da; /* Light red for alerts */
+  color: #721c24; /* Darker red for text */
 }
 
 /* Responsive Styles */
 @media (max-width: 768px) {
-  .resume-ai {
-    font-size: 1.5rem; /* Adjust font size for smaller screens */
+  .resume-aid {
+    font-size: 2rem; /* Adjust font size for smaller screens */
   }
 }
