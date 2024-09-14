@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect } from "react";
 import { Form, Button, Card, Alert } from "react-bootstrap";
 import { useAuth } from "../contexts/AuthContext";
 import { Link, useHistory } from "react-router-dom";
-import '../App.css'; // Correctly references the renamed file
+import '../App.css'; // Ensure this is the correct path
 
 export default function Login() {
   const emailRef = useRef();
@@ -24,7 +24,6 @@ export default function Login() {
     setTheme(mediaQuery.matches ? "dark" : "light");
     mediaQuery.addEventListener("change", handleThemeChange);
 
-    // Cleanup listener on component unmount
     return () => mediaQuery.removeEventListener("change", handleThemeChange);
   }, []);
 
@@ -39,9 +38,9 @@ export default function Login() {
       setError("");
       setLoading(true);
       await login(emailRef.current.value, passwordRef.current.value);
-      history.push("/");
+      history.push("/"); // Redirect to the home page after login
     } catch {
-      setError("Failed to log in");
+      setError("Failed to log in to ResumeAI");
     }
 
     setLoading(false);
@@ -49,9 +48,11 @@ export default function Login() {
 
   return (
     <>
-      <Card>
-        <Card.Body>
-          <h2 className="text-center mb-4">Log In</h2>
+      <Card className={theme}>
+        <Card.Body className={theme}>
+          <h2 className="text-center mb-4">
+            Log In to <span className="resume-ai">Resum<strong>AI</strong>d</span>
+          </h2>
           {error && <Alert variant="danger">{error}</Alert>}
           <Form onSubmit={handleSubmit}>
             <Form.Group id="email">

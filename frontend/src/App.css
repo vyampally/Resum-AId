@@ -1,19 +1,43 @@
 /* App.css */
 
-body.light {
-    background-color: white;
-    color: black;
+/* General Styles */
+body {
+  font-family: 'Roboto', sans-serif; /* Default font for the application */
+  background-color: #f8f9fa; /* Light background color */
+  color: #333; /* Default text color */
+  margin: 0;
+  padding: 0;
+}
+
+/* Card Styles */
+.card {
+  margin: 20px;
+  border-radius: 8px;
+}
+
+/* ResumeAI Specific Styles */
+.resume-ai {
+  font-family: 'Roboto', sans-serif; /* Ensure it uses the same font */
+  font-weight: 700; /* Bold */
+  font-size: 2rem; /* Increased size for better visibility */
+  color: #007bff; /* Change color for better visibility (optional) */
+}
+
+/* Button Styles */
+button {
+  background-color: #007bff; /* Primary button color */
+  border: none;
+  color: white;
+}
+
+/* Alert Styles */
+.alert {
+  margin: 20px 0; /* Add margin to alerts */
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .resume-ai {
+    font-size: 1.5rem; /* Adjust font size for smaller screens */
   }
-  
-  body.dark {
-    background-color: #121212;
-    color: white;
-  }
-  
-  /* Additional styles for cards, buttons, etc. can also be adjusted based on theme */
-  .card {
-    background-color: inherit;
-    border: 1px solid currentColor; /* Adjust border color based on theme */
-  }
-  
-  /* Ensure Bootstrap styles adapt to your theme */
+}
