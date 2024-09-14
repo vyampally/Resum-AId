@@ -5,7 +5,7 @@ from audio_recorder_streamlit import audio_recorder
 from streamlit_webrtc import webrtc_streamer, WebRtcMode, VideoProcessorBase
 
 # Constants
-API_URL = "http://localhost:8501"  # URL of your FastAPI server
+API_URL = "http://localhost:8000"  # URL of your FastAPI server
 
 # Function to upload a file to the backend
 def upload_file(file, endpoint, field_name):
