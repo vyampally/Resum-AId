@@ -1,0 +1,19 @@
+/* App.css */
+
+body.light {
+    background-color: white;
+    color: black;
+  }
+  
+  body.dark {
+    background-color: #121212;
+    color: white;
+  }
+  
+  /* Additional styles for cards, buttons, etc. can also be adjusted based on theme */
+  .card {
+    background-color: inherit;
+    border: 1px solid currentColor; /* Adjust border color based on theme */
+  }
+  
+  /* Ensure Bootstrap styles adapt to your theme */

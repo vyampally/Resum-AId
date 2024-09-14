@@ -1,29 +1,50 @@
-import React, { useRef, useState } from "react"
-import { Form, Button, Card, Alert } from "react-bootstrap"
-import { useAuth } from "../contexts/AuthContext"
-import { Link, useHistory } from "react-router-dom"
+import React, { useRef, useState, useEffect } from "react";
+import { Form, Button, Card, Alert } from "react-bootstrap";
+import { useAuth } from "../contexts/AuthContext";
+import { Link, useHistory } from "react-router-dom";
+import '../App.css'; // Correctly references the renamed file
 
 export default function Login() {
-  const emailRef = useRef()
-  const passwordRef = useRef()
-  const { login } = useAuth()
-  const [error, setError] = useState("")
-  const [loading, setLoading] = useState(false)
-  const history = useHistory()
+  const emailRef = useRef();
+  const passwordRef = useRef();
+  const { login } = useAuth();
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+  const history = useHistory();
+  const [theme, setTheme] = useState("light");
+
+  // Effect to set the theme based on system preference
+  useEffect(() => {
+    const handleThemeChange = (e) => {
+      const newTheme = e.matches ? "dark" : "light";
+      setTheme(newTheme);
+    };
+
+    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+    setTheme(mediaQuery.matches ? "dark" : "light");
+    mediaQuery.addEventListener("change", handleThemeChange);
+
+    // Cleanup listener on component unmount
+    return () => mediaQuery.removeEventListener("change", handleThemeChange);
+  }, []);
+
+  useEffect(() => {
+    document.body.className = theme; // Apply the theme class to the body
+  }, [theme]);
 
   async function handleSubmit(e) {
-    e.preventDefault()
+    e.preventDefault();
 
     try {
-      setError("")
-      setLoading(true)
-      await login(emailRef.current.value, passwordRef.current.value)
-      history.push("/")
+      setError("");
+      setLoading(true);
+      await login(emailRef.current.value, passwordRef.current.value);
+      history.push("/");
     } catch {
-      setError("Failed to log in")
+      setError("Failed to log in");
     }
 
-    setLoading(false)
+    setLoading(false);
   }
 
   return (
@@ -45,12 +66,11 @@ export default function Login() {
               Log In
             </Button>
           </Form>
-
         </Card.Body>
       </Card>
       <div className="w-100 text-center mt-2">
         Need an account? <Link to="/signup">Sign Up</Link>
       </div>
     </>
-  )
+  );
 }
