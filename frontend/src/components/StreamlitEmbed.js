@@ -1,18 +1,12 @@
-import React from 'react';
+import { useEffect } from 'react';  // Import only what is needed
 
-const StreamlitEmbed = () => {
-    return (
-        <div style={{ width: '100vw', height: '100vh', margin: 0, padding: 0 }}>
-            <iframe
-                src="http://localhost:8501"  // URL where Streamlit is running
-                width="100%"
-                height="100%"
-                frameBorder="0"
-                title="Streamlit App"
-                style={{ display: 'block', border: 'none' }}
-            ></iframe>
-        </div>
-    );
+const StreamlitRedirect = () => {
+    useEffect(() => {
+        // Redirect to the Streamlit app's URL (replace localhost:8501 with the actual port)
+        window.location.href = "http://localhost:8501/";  // URL where Streamlit is running
+    }, []);  // This runs the redirect only once when the component mounts
+
+    return null;  // No need to render anything
 };
 
-export default StreamlitEmbed;
+export default StreamlitRedirect;
