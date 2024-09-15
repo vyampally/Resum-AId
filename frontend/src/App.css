@@ -1,0 +1,171 @@
+/* General Styles */
+body {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+  margin: 0;
+  padding: 0;
+  background-image: url('./images/pexels-joyston-judah-331625-933054.jpg'); /* Light Mode Background Image */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: #333; /* Default text color */
+}
+
+body.dark-mode {
+  background-image: url('./images/dark-mountain.jpg'); /* Dark Mode Background Image */
+  color: white; /* General text color for dark mode */
+}
+
+/* Card Styles */
+.card {
+  margin: 20px;
+  border-radius: 15px;
+  box-shadow: none;
+  background-color: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  border: none;
+  padding: 20px;
+}
+
+body.dark-mode .card {
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+}
+
+/* Specific styles for labels and form controls */
+label {
+  color: #4a1c1c; /* Dark color for light mode */
+}
+
+body.dark-mode label {
+  color: white; /* Change to white for dark mode */
+}
+
+input[type="email"], input[type="password"] {
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  padding: 10px;
+}
+
+body.dark-mode input[type="email"], body.dark-mode input[type="password"] {
+  border: 1px solid #555;
+  background-color: #333;
+  color: white;
+}
+
+/* ResumeAid Specific Styles */
+.resume-aid {
+  font-weight: 400;
+  font-size: 2.5rem;
+  color: #4a1c1c; /* Dark color for light mode */
+}
+
+.resume-aid-bold {
+  color: #CC6633; /* Burnt orange for light mode */
+}
+
+body.dark-mode .resume-aid {
+  color: white; /* White for dark mode */
+}
+
+body.dark-mode .resume-aid-bold {
+  color: #CC6633; /* Burnt orange for dark mode */
+  text-decoration: underline; /* Underline "Ai" in dark mode */
+}
+
+/* Button Styles */
+button {
+  background-color: rgba(212, 93, 0, 0.8);
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+}
+
+button:hover {
+  background-color: rgba(179, 67, 0, 0.9);
+}
+
+/* Button disabled state */
+button:disabled {
+  background-color: rgba(150, 150, 150, 0.8);
+}
+
+/* Alert Styles */
+.alert {
+  margin: 20px 0;
+  background-color: rgba(248, 215, 218, 0.8);
+  color: #721c24;
+}
+
+body.dark-mode .alert {
+  background-color: rgba(255, 50, 50, 0.8);
+  color: white;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .resume-aid {
+    font-size: 2rem; /* Adjust font size for smaller screens */
+  }
+}
+
+/* Title styles for login and signup pages */
+.login-title, .signup-title {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+body.dark-mode .login-title, body.dark-mode .signup-title {
+  color: white; /* Ensure titles are white in dark mode */
+}
+
+/* Title styles for "Log In to ResumAid" */
+.login-title {
+  font-size: 2rem;
+}
+
+body.dark-mode .login-title .log-in {
+  color: white; /* Ensure "Log In to" is white in dark mode */
+}
+
+.login-title .resume-aid-bold {
+  text-decoration: underline; /* Underline "Ai" */
+}
+
+/* Title styles for "Sign Up" */
+.signup-title {
+  font-size: 2rem;
+}
+
+body.dark-mode .signup-title {
+  color: white; /* Ensure "Sign Up" title is white in dark mode */
+}
+
+/* Additional styling for forms and buttons */
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-control {
+  border-radius: 5px;
+  border: 1px solid #ddd;
+}
+
+body.dark-mode .form-control {
+  border: 1px solid #555;
+  background-color: #333;
+  color: white;
+}
+
+.link-button {
+  background: none;
+  border: none;
+  color: #CC6633;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+body.dark-mode .link-button {
+  color: white; /* White color for dark mode */
+}
