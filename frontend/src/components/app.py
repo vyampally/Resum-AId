@@ -81,7 +81,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # Streamlit UI
-st.title("Interview Bot")
+st.title("ResumAId")
 st.write("Welcome to the interactive interview bot. Please follow the steps below to proceed.")
 
 # Upload resume
